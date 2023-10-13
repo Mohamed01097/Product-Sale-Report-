@@ -1,0 +1,42 @@
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="inherit_selected_sale_report_form">
+            <field name="name">Selected Sales Form</field>
+            <field name="model">sale.selected.report</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="sale_order" string="Orders" widget="many2many_tags"/>
+                            </group>
+                        </group>
+                        <footer>
+                            <button name="generate_sale_pdf_report" string="Print" type="object"
+                                    class="oe_highlight"/>
+                            <button string="Cancel" class="btn-secondary" special="cancel" data-hotkey="z"/>
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="sale_report_wizard_action_window">
+            <field name="name">Selected Report</field>
+            <field name="res_model">sale.selected.report</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="inherit_selected_sale_report_form"/>
+            <field name="target">new</field>
+        </record>
+
+
+        <menuitem name="Generate Report"
+                  id="selected_sale_products_report_production"
+                  parent="sale.sale_order_menu"
+                  sequence="50"
+                  action="sale_report_wizard_action_window"/>
+
+    </data>
+</odoo>
